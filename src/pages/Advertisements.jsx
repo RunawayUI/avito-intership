@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Advertisements = () => {
   const [ads, setAds] = useState([]);
@@ -10,7 +11,7 @@ const Advertisements = () => {
     const fetchAds = async () => {
       try {
         const response = await axios.get('http://localhost:5000/advertisements');
-        console.log(response.data);  // Добавьте лог для проверки данных
+        console.log(response.data);
         setAds(response.data);
         setLoading(false);
       } catch (error) {
@@ -29,23 +30,10 @@ const Advertisements = () => {
   return (
     <div>
       <h1>Объявления</h1>
-      <h2>{ads[1].name}</h2>
       <div className="ads-list">
         {ads.map(ad => (
-            <div className="ad">
-                <h2>{ad.name}</h2>
-                {ad.description && <p>{ad.description}</p>}
-                <p>Цена: {ad.price} руб.</p>
-                <p>Просмотры: {ad.views}</p>
-                <p>Лайки: {ad.likes}</p>
-                <p>Дата создания: {new Date(ad.createdAt).toLocaleDateString()}</p>
-            </div>
-        ))}
-      </div>
-      {/* <div className="ads-list">
-        {ads.map(ad => (
           <div key={ad.id} className="ad">
-            <h2>{ad.name}</h2>
+            <h2><Link to={`/advertisements/${ad.id}`}>{ad.name}</Link></h2>
             {ad.description && <p>{ad.description}</p>}
             <p>Цена: {ad.price} руб.</p>
             <p>Просмотры: {ad.views}</p>
@@ -53,7 +41,7 @@ const Advertisements = () => {
             <p>Дата создания: {new Date(ad.createdAt).toLocaleDateString()}</p>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
