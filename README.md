@@ -11,7 +11,7 @@
 Установите необходимые зависимости для проекта:
 
 ### `npm install`
-###3. Запуск json-server
+### 3. Запуск json-server
 Запустите json-server для работы с данными:
 
 ### `npx json-server --watch db.json --port 5000`
